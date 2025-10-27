@@ -3,7 +3,8 @@ from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-
+#roda o fastapi
+#python -m uvicorn main:app --reload
 app = FastAPI(title="Lista de alunos")
 
 #Definir a pasta onde está os html
