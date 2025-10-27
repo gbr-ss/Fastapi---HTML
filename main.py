@@ -1,6 +1,6 @@
 # pip install fastapi uvicorn jinja2 python-multipart
 from fastapi import FastAPI, Request, Form
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 #roda o fastapi
@@ -28,3 +28,15 @@ def home(request: Request):
         "index.html",
         {"request": request, "lista_alunos": alunos}
     )
+
+@app.get("/cadastro", response_class=HTMLResponse)
+def tela_cadastro(request: Request):
+    return templates.TemplateResponse(
+        "cadastro.html",
+        {"request": request}
+    )
+
+@app.post("/cadastro")
+def salvar_aluno(nome: str = Form(...),nota:float = Form(...)):
+    alunos.append({"nome": nome,"nota": nota})
+    return RedirectResponse(Url="/", status_code=300)
